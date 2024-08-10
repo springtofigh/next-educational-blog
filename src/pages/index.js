@@ -1,9 +1,13 @@
 import { ChevronDownIcon, AdjustmentsIcon, HeartIcon, BookmarkIcon, AnnotationIcon, ClockIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
 import { useState } from 'react';
+import axios from 'axios';
+import PostList from "@/components/Posts/PostList";
 
 
-export default function Home() {
+export default function Home({ blogsData }) {
+  console.log(blogsData);
+  
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div className="bg-purple-100">
@@ -51,29 +55,18 @@ export default function Home() {
         </div>
       </div>
       {/* بخش بلاگ */}
-      <div className='grid grid-cols-6 gap-4 md:col-span-9'>{["2.png","3.png","4.png","vuejs.png","nuxt-icon.png", "next-JS-framework.png"].map((item, index) => {
-        return (
-          <div className="bg-white col-span-6 md:col-span-3 lg:col-span-2 rounded-3xl p-2 object-cover w-full h-full object-center" key={index}>
-          {/* تصویر مقاله */}
-          <div className="aspect-h-9 aspect-w-16">
-            <img src={`/images/${item}`} alt="" className="rounded-2xl" />
-          </div>
-          {/* محتوا */}
-          <div className="bg-gray-50 py-2 rounded-2xl">
-            <h2 className="mb-4 text-bold">بررسی کامل ریکت و ریداکس</h2>
-            <div className='flex items-center justify-between'>
-              <div className="flex items-center">
-                <img src="/images/nodejs-logo.png" alt="" className="rounded-full w-6 h-6 ring-2 ring-violet-600 ml-2" />
-                <span>بهار توفیق</span>
-              </div>
-              <span className="text-xs px-2 py-1 bg-purple-300 text-purple-600 rounded-xl hover:bg-purple-600 hover:text-purple-300 transition-all duration-300 cursor-pointer">ری‌اکت</span>
-            </div>
-          </div>
-        </div>
-        )
-      })}</div>
+      <div className='grid grid-cols-6 gap-4 md:col-span-9'>
+        <PostList  blogsData = { blogsData } />
+      </div>
           </div>
     </div>
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const { data: result } = await axios.get('http://localhost:5000/api/posts?page=1&limit=6');
+  const { data } = result;
+
+  return { props: { blogsData: data } }
 }
