@@ -1,12 +1,12 @@
-import { ChevronDownIcon, AdjustmentsIcon, HeartIcon, BookmarkIcon, AnnotationIcon, ClockIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, AdjustmentsIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
 import { useState } from 'react';
 import axios from 'axios';
 import PostList from "@/components/Posts/PostList";
 
 
-export default function Home({ blogsData }) {
-  console.log(blogsData);
+export default function Home({ blogsData, postCategories }) {
+  console.log(postCategories);
   
   const [isOpen, setIsOpen] = useState(false)
   return (
@@ -22,21 +22,22 @@ export default function Home({ blogsData }) {
         </div>
         {/* محتوای منوی آکاردئونی */}
         <div className={`${isOpen ? "block" :"hidden"}`}>
-          <Link href="#">
+          <Link href="/blogs">
           <span className="block pr-4 py-2 hover:bg-purple-500 mb-1">
             همه مقالات
           </span>
           </Link>
-          <Link href="#">
-          <span className="block pr-4 py-2 hover:bg-purple-500 mb-1">
-            ریکت
-          </span>
-          </Link>
-          <Link href="#">
-          <span className="block pr-4 py-2 hover:bg-purple-500">
-            جاوااسکریپت
-          </span>
-          </Link>
+          {
+            postCategories.map(category => {
+              return (
+                <Link href={`/blogs/${category.englishTitle}`} key={category._id}>
+                <span className="block pr-4 py-2 hover:bg-purple-500 mb-1">
+                  {category.title}
+                </span>
+                </Link>
+              )
+            })
+          }
         </div>
         
         </div>
@@ -66,7 +67,8 @@ export default function Home({ blogsData }) {
 
 export async function getServerSideProps(context) {
   const { data: result } = await axios.get('http://localhost:5000/api/posts?page=1&limit=6');
+  const { data: postCategories } = await axios.get('http://localhost:5000/api/post-category')
   const { data } = result;
 
-  return { props: { blogsData: data } }
+  return { props: { blogsData: data, postCategories: postCategories.data } }
 }
