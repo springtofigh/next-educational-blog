@@ -91,7 +91,7 @@ function postPage({ post }) {
           {/* Share media btns */}
           <div className="flex items-center md:gap-x-4 gap-x-3 w-full justify-evenly md:w-auto">
             <a
-            href=""
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
             target="_blank"
             className="block"
             rel="noreferrer"
@@ -99,20 +99,20 @@ function postPage({ post }) {
               <IoLogoLinkedin size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
             </a>
             <a
-            href=""
+            href={`https://twitter.com/share?text=${post.title}&url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
             target="_blank"
             className="block"
             rel="noreferrer"
             >
-              <IoLogoTwitter size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
+              <IoLogoTwitter size={24} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
             </a>
             <a
-            href=""
+            href={`https://telegram.me/share/url?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}&text=${post.title}`}
             target="_blank"
             className="block"
             rel="noreferrer"
             >
-              <FaTelegram size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
+              <FaTelegram size={24} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
             </a>
           </div>
         </div>
