@@ -1,5 +1,6 @@
-import { HeartIcon, BookmarkIcon, AnnotationIcon, ClockIcon } from "@heroicons/react/outline";
+import { ClockIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
+import PostInteraction from "./PostInteraction";
 
 
 function PostList({ blogsData }) {
@@ -33,19 +34,7 @@ function PostList({ blogsData }) {
               </div>
             {/* BLOG INTERACTION */}
               <div className='flex items-center justify-between'>
-                <div className='flex items-center gap-x-2'>
-                  <button className='flex items-center bg-gray-200 p-0.5 rounded'>
-                    <AnnotationIcon className='w-4 h-4 stroke-gray-500'/>
-                    <span className='textxs text-gray-500 font-bold leading-3'>{blog.commentsCount}</span>
-                  </button>
-                  <button className='flex items-center bg-gray-200 p-0.5 rounded'>
-                    <HeartIcon className='w-4 h-4 stroke-red-500'/>
-                    <span className='text-xs text-red-500 font-bold leading-3'>{blog.likesCount}</span>
-                  </button>
-                  <button className='flex items-center bg-gray-200 p-0.5 rounded'>
-                    <BookmarkIcon className='w-4 h-4 stroke-blue-500'/>
-                  </button>
-                </div>
+                <PostInteraction post={blog} isSmall />
                 <div className='flex items-center text-gray-400 text-[10px] font-bold'>
                   <ClockIcon className='w-4 h-4 stroke-gray-400 ml-1'/>
                   <span className='ml-1'>زمان مطالعه:</span>

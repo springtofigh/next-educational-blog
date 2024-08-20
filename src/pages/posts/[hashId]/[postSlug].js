@@ -3,10 +3,9 @@ import { BookmarkIcon as SolidBookmarkIcon } from "@heroicons/react/solid";
 import { convertToPersianNumbers } from "@/utils/toPersianNumbers";
 import axios from 'axios';
 import Link from 'next/link';
+import PostInteraction from "@/components/Posts/PostInteraction";
 
 function postPage({ post }) {
-  console.log(post);
-  
   return (
     <div className='bg-gray-50 min-h-screen'>
       <div className="md:max-w-screen-lg container mx-auto">
@@ -48,7 +47,7 @@ function postPage({ post }) {
           </button>
         </div>
       </header>
-      <main className="prose prose-xl prose-slate prose-h1:text-xl md:prose-h1:text-3xl prose-h1:font-black prose-h2:text-xl md:prose-h2:text-2xl prose-h2:font-extrabold prose-p:text-base prose-p:leading-8 md:prose-p:text-lg md:prose-p:leading-10 prose-img:rounded-xl prose-a:text-blue-600">
+      <main className="prose prose-xl prose-slate prose-h1:text-xl md:prose-h1:text-3xl prose-h1:font-black prose-h2:text-xl md:prose-h2:text-2xl prose-h2:font-extrabold prose-p:text-base prose-p:leading-8 md:prose-p:text-lg md:prose-p:leading-10 prose-img:rounded-xl prose-a:text-blue-600 mb-8">
         <h1>{post.title}</h1>
         <h2>عنوان اول تستی</h2>
         <p>
@@ -69,6 +68,26 @@ function postPage({ post }) {
             }`}
         </pre>
       </main>
+      {/* tags like bookmark */}
+      <section>
+        <ul className='flex items-center flex-wrap gap-x-4'>
+          {["فرانت اند", "برنامه‌نویسی" , "جاوااسکریپت", "React.js"].map((tag, index) => {
+            return (
+              <li
+              key={index}
+              className="bg-gray-200 px-3 py-1 rounded-2xl text-gray-600 tesxt-sm hover:bg-gray-100 cursor-pointer mb-3 transition-all block"
+              >
+                {tag}
+              </li>
+            )
+          })
+          }
+        </ul>
+        {/* Link comment Bookmark */}
+        <div>
+          <PostInteraction post={post}/>
+        </div>
+      </section>
       </div>
     </div>
   )
