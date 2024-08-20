@@ -2,10 +2,10 @@ import { HeartIcon, BookmarkIcon, AnnotationIcon } from "@heroicons/react/outlin
 import { HeartIcon as SolidHeartIcon, BookmarkIcon as SolidBookmarkIcon } from "@heroicons/react/solid";
 import { convertToPersianNumbers } from "@/utils/toPersianNumbers";
 
-function PostInteraction({ post, isSmall }) {
+function PostInteraction({ post, isSmall, className }) {
     const iconSize = `${isSmall ? "w-4 h-4": "w-6 h-6"}`
   return (
-    <div className={`flex items-center ${isSmall ? "gap-x-2": "gap-x-4"}`}>
+    <div className={`flex items-center ${isSmall ? "gap-x-2": "gap-x-4"} ${className}`}>
     <button className='flex items-center bg-gray-200 p-0.5 rounded'>
       <AnnotationIcon className={`${iconSize} stroke-gray-500`}/>
       <span className='textxs text-gray-500 font-bold leading-3'>{convertToPersianNumbers(post.commentsCount)}</span>

@@ -4,11 +4,13 @@ import { convertToPersianNumbers } from "@/utils/toPersianNumbers";
 import axios from 'axios';
 import Link from 'next/link';
 import PostInteraction from "@/components/Posts/PostInteraction";
+import { IoLogoLinkedin, IoLogoTwitter  } from "react-icons/io";
+import { FaTelegram } from "react-icons/fa";
 
 function postPage({ post }) {
   return (
     <div className='bg-gray-50 min-h-screen'>
-      <div className="md:max-w-screen-lg container mx-auto">
+      <div className="md:max-w-screen-md container mx-auto">
       <header className='flex flex-col gap-y-5 md:flex-row md:justify-between md:items-start mx-auto mb-12'>
         {/* Author */}
         <div className="flex items-stretch">
@@ -70,7 +72,7 @@ function postPage({ post }) {
       </main>
       {/* tags like bookmark */}
       <section>
-        <ul className='flex items-center flex-wrap gap-x-4'>
+        <ul className='flex items-center flex-wrap gap-x-4 mb-6'>
           {["فرانت اند", "برنامه‌نویسی" , "جاوااسکریپت", "React.js"].map((tag, index) => {
             return (
               <li
@@ -84,8 +86,35 @@ function postPage({ post }) {
           }
         </ul>
         {/* Link comment Bookmark */}
-        <div>
-          <PostInteraction post={post}/>
+        <div className="flex items-center flex-col gap-y-8 md:flex-row md:justify-between">
+          <PostInteraction post={post} className="w-full justify-evenly md:w-auto"/>
+          {/* Share media btns */}
+          <div className="flex items-center md:gap-x-4 gap-x-3 w-full justify-evenly md:w-auto">
+            <a
+            href=""
+            target="_blank"
+            className="block"
+            rel="noreferrer"
+            >
+              <IoLogoLinkedin size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
+            </a>
+            <a
+            href=""
+            target="_blank"
+            className="block"
+            rel="noreferrer"
+            >
+              <IoLogoTwitter size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
+            </a>
+            <a
+            href=""
+            target="_blank"
+            className="block"
+            rel="noreferrer"
+            >
+              <FaTelegram size={30} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
+            </a>
+          </div>
         </div>
       </section>
       </div>
