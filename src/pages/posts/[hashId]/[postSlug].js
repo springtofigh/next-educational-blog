@@ -6,12 +6,25 @@ import Link from 'next/link';
 import PostInteraction from "@/components/Posts/PostInteraction";
 import { IoLogoLinkedin, IoLogoTwitter  } from "react-icons/io";
 import { FaTelegram } from "react-icons/fa";
+import { MdContentCopy } from "react-icons/md";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useState } from "react";
+import PostList from "@/components/Posts/PostList";
+
 
 function postPage({ post }) {
+  const [copied, setCopied] = useState(false);
+  const copyHandler = () => {
+    setCopied(true)
+    setTimeout(() => {
+      setCopied(false)
+    }, 1000);
+  }
+
   return (
     <div className='bg-gray-50 min-h-screen'>
-      <div className="md:max-w-screen-md container mx-auto">
-      <header className='flex flex-col gap-y-5 md:flex-row md:justify-between md:items-start mx-auto mb-12'>
+      <div className="md:max-w-screen-lg container mx-auto">
+      <header className='max-w-screen-md flex flex-col gap-y-5 md:flex-row md:justify-between md:items-start mx-auto mb-12'>
         {/* Author */}
         <div className="flex items-stretch">
           <img src='/images/avatar.jpg' alt={post.author.name} className="w-14 h-14 md:w-20 md:h-20 rounded-full ring ring-violet-600"/>
@@ -49,7 +62,7 @@ function postPage({ post }) {
           </button>
         </div>
       </header>
-      <main className="prose prose-xl prose-slate prose-h1:text-xl md:prose-h1:text-3xl prose-h1:font-black prose-h2:text-xl md:prose-h2:text-2xl prose-h2:font-extrabold prose-p:text-base prose-p:leading-8 md:prose-p:text-lg md:prose-p:leading-10 prose-img:rounded-xl prose-a:text-blue-600 mb-8">
+      <main className="prose prose-xl prose-slate prose-h1:text-xl md:prose-h1:text-3xl prose-h1:font-black prose-h2:text-xl md:prose-h2:text-2xl prose-h2:font-extrabold prose-p:text-base prose-p:leading-8 md:prose-p:text-lg md:prose-p:leading-10 prose-img:rounded-xl prose-a:text-blue-600 mb-8 mx-auto max-w-screen-md">
         <h1>{post.title}</h1>
         <h2>عنوان اول تستی</h2>
         <p>
@@ -89,7 +102,8 @@ function postPage({ post }) {
         <div className="flex items-center flex-col gap-y-8 md:flex-row md:justify-between">
           <PostInteraction post={post} className="w-full justify-evenly md:w-auto"/>
           {/* Share media btns */}
-          <div className="flex items-center md:gap-x-4 gap-x-3 w-full justify-evenly md:w-auto">
+          <div className="flex items-center gap-x-6 justify-between w-full md:w-auto">
+          <div className="flex items-center md:gap-x-4 gap-x-6 w-full md:w-auto">
             <a
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
             target="_blank"
@@ -115,6 +129,28 @@ function postPage({ post }) {
               <FaTelegram size={24} className="fill-gray-400 hover:fill-gray-500 transition-all duration-300 cursor-pointer" />
             </a>
           </div>
+          <div className='relative'>
+          <CopyToClipboard 
+            text={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
+            onCopy={copyHandler}>
+            <div className="flex items-center bg-gray-100 px-3 py-1 text-gray-600 border rounded-2xl gap-x-2 text-sm cursor-pointer md:text-base">
+              <span>کپی&nbsp;لینک</span>
+              <MdContentCopy size={24} />
+            </div>
+          </CopyToClipboard>
+          {
+            copied && <span className='absolute top-0 left-0 px-3 py-1 rounded-2xl bg-blue-500 text-white text-sm'>کپی شد</span>
+          }
+          </div>
+          </div>
+        </div>
+      </section>
+      <section className="mb-20">
+        <h2 className='font-extrabold text-2xl md:text-3xl mb-8'>
+          پست های مشابه
+        </h2>
+        <div className='grid grid-cols-6 gap-8'>
+        <PostList blogsData={post.related} />
         </div>
       </section>
       </div>
