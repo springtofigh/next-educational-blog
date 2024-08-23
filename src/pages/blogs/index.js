@@ -21,7 +21,7 @@ function Blog({ blogsData, postCategories }) {
             </div>
             {/* Blogs Section */}
             <div className='grid grid-cols-6 gap-4 md:col-span-9'>
-              <PostList  blogsData = { blogsData } />
+              <PostList blogsData={blogsData.docs}/>
             </div>
         </div>
     </div>
