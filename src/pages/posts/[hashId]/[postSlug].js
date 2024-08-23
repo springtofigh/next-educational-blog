@@ -10,6 +10,7 @@ import { MdContentCopy } from "react-icons/md";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useState } from "react";
 import PostList from "@/components/Posts/PostList";
+import PostComments from "@/components/Posts/postComments";
 
 
 function postPage({ post }) {
@@ -153,6 +154,8 @@ function postPage({ post }) {
         <PostList blogsData={post.related} />
         </div>
       </section>
+      {/* Post Comments */}
+      <PostComments post={post} />
       </div>
     </div>
   )
