@@ -10,7 +10,8 @@ import { MdContentCopy } from "react-icons/md";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { useState } from "react";
 import PostList from "@/components/Posts/PostList";
-import PostComments from "@/components/Posts/postComments";
+import PostComments from "@/components/Posts/PostComments";
+import toLocalDate from "@/utils/toLocalDate";
 
 
 function postPage({ post }) {
@@ -38,7 +39,7 @@ function postPage({ post }) {
           </div>
           <span className="hidden md:block font-bold text-xs">{post.author.biography}</span>
           <div className="font-normal text-gray-400 text-xs">
-            <span className="mx-1">{new Date(post.createdAt).toLocaleDateString('fa-IR')}</span>
+            <span className="mx-1">{toLocalDate(post.createdAt)}</span>
             <span>&bull;</span>
             <span>
               <span> خواندن </span>
