@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SingleComment from "./SingleComment";
 
 function PostComments({ post }) {
     const [comment, setComment] = useState(" ");
@@ -6,7 +7,9 @@ function PostComments({ post }) {
     <div>
         <h2>نظرات</h2>
         {post.comments.map((comment, index) => {
-                return !comment.responseTo && comment.status === 2 && <React.Fragment key={comment._id}></React.Fragment>
+                return !comment.responseTo && comment.status === 2 && <React.Fragment key={comment._id}>
+                  <SingleComment comment={comment} />
+                </React.Fragment>
             })}
 
             {/* Send Comments */}
