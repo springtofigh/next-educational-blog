@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import Layout from '@/containers/Layout';
 
 export default function Home() {
   return (
+    <Layout>
     <div className='flex items-center justify-center'>
       <h2>سلام بهار</h2>
       <Link href="/blogs">
@@ -10,6 +12,8 @@ export default function Home() {
             </span>
       </Link>
     </div>
+    </Layout>
+
   )
 }
 

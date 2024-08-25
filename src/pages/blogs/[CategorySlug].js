@@ -4,11 +4,12 @@ import MobileCategory from "@/components/Posts/MobileCategory";
 import SortBar from "@/components/Posts/SortBar";
 import DesktopCategory from "@/components/Posts/DesktopCategory";
 import queryString from 'query-string';
+import Layout from '@/containers/Layout';
 
 
 function blogCategory({ blogsData, postCategories }) {
   return (
-    <div className="bg-purple-100">
+    <Layout> 
     <div className="container mx-auto lg:max-w-screen-xl px-4 md:px-0">
             {/* Mobile category */}
               <MobileCategory postCategories={postCategories} />
@@ -26,7 +27,7 @@ function blogCategory({ blogsData, postCategories }) {
             </div>
         </div>
     </div>
-  </div>
+    </Layout>
   )
 }
 

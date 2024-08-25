@@ -12,6 +12,7 @@ import { useState } from "react";
 import PostList from "@/components/Posts/PostList";
 import PostComments from "@/components/Posts/PostComments";
 import toLocalDate from "@/utils/toLocalDate";
+import Layout from '@/containers/Layout';
 
 
 function postPage({ post }) {
@@ -24,7 +25,7 @@ function postPage({ post }) {
   }
 
   return (
-    <div className='bg-gray-50 min-h-screen'>
+    <Layout>
       <div className="md:max-w-screen-lg container mx-auto">
       <header className='max-w-screen-md flex flex-col gap-y-5 md:flex-row md:justify-between md:items-start mx-auto mb-12'>
         {/* Author */}
@@ -158,7 +159,7 @@ function postPage({ post }) {
       {/* Post Comments */}
       <PostComments post={post} />
       </div>
-    </div>
+    </Layout>
   )
 }
 
