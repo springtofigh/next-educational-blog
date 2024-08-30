@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SingleComment from "./SingleComment";
-import CommentForm from "./commentForm";
+import CommentForm from "./CommentForm";
 import ReplyComment from "./ReplyComment";
 
 function PostComments({ post }) {
