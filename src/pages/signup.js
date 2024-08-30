@@ -4,6 +4,9 @@ import InputComponent from '@/components/FormInput';
 import Link from 'next/link';
 import Layout from '@/containers/Layout';
 import Head from 'next/head';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 // Initial values
 const initialValues = {
@@ -36,9 +39,18 @@ const validationSchema = Yup.object({
 
 
 function RegisterForm() {
+    const router = useRouter()
     // onSubmit
     const onSubmit = (values) => {
         const { name, email, password, phoneNumber } = values
+        axios.post('http://localhost:5000/api/user/signup', values, { withCredentials: true })
+        .then(res => {
+            toast.success('ثبت نام شما با موفقیت انجام شد');
+            router.push('/')
+        })
+        .catch(err =>{
+            toast.error(err?.response?.data?.message);
+        });
     }
 
     const formik = useFormik({
