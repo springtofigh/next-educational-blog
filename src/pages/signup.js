@@ -7,6 +7,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { useAuthActions } from '@/context/AuthContext';
 
 // Initial values
 const initialValues = {
@@ -23,7 +24,7 @@ const validationSchema = Yup.object({
     .required("نام و نام خانوادگی را وارد")
     .min(6, "نام و نام‌خانوادگی باید حداقل ۶ کرکتر باشد"),
     phoneNumber: Yup.string()
-    .required("شماره موبایل را وادر کنید")
+    .required("شماره موبایل را وارد کنید")
     .matches(/^[0-9]{11}$/,"شماره موبایل باید ۱۱ رقم باشد")
     .nullable(),
     email: Yup.string().email('ایمیل نامعتبر است').required('لطفا ایمیل را وارد کنید'),
@@ -39,18 +40,12 @@ const validationSchema = Yup.object({
 
 
 function RegisterForm() {
-    const router = useRouter()
+    const router = useRouter();
+    const dispatch = useAuthActions();
     // onSubmit
     const onSubmit = (values) => {
         const { name, email, password, phoneNumber } = values
-        axios.post('http://localhost:5000/api/user/signup', values, { withCredentials: true })
-        .then(res => {
-            toast.success('ثبت نام شما با موفقیت انجام شد');
-            router.push('/')
-        })
-        .catch(err =>{
-            toast.error(err?.response?.data?.message);
-        });
+        dispatch({type:'SIGNUP', payload: { name, email, password, phoneNumber }})
     }
 
     const formik = useFormik({
