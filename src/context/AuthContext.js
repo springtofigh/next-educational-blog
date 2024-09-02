@@ -3,6 +3,7 @@ import { createContext, useContext } from "react"
 import { useReducerAsync } from "use-reducer-async";
 import toast from 'react-hot-toast';
 import Router from "next/router";
+import { useEffect } from "react";
 
 const AuthContext = createContext();
 const AuthContextDispatcher = createContext();
@@ -47,11 +48,36 @@ const asyncActionHandlers = {
             toast.error(err?.response?.data?.message);
         });
     },
-    SIGNOUT: {},
+    LOAD_USER: ({ dispatch }) => (action) => {
+        dispatch({ type: "SIGNIN_PENDING" });
+        axios
+        .get('http://localhost:5000/api/user/load',{ withCredentials: true })
+        .then(({ data }) => {
+            dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
+        })
+        .catch(err =>{
+            dispatch({ type: "SIGNIN_REJECT" , error: err?.response?.data?.message});
+        });
+    },
+    SIGNOUT: ({ dispatch }) => (action) => {
+        dispatch({ type: "SIGNIN_PENDING" });
+        axios
+        .get('http://localhost:5000/api/user/logout',{ withCredentials: true })
+        .then(({ data }) => {
+            window.location.href= "/"
+        })
+        .catch();
+    },
 };
 
 function AuthProvider({ children }) {
     const [user, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
+
+    useEffect(() => {
+        dispatch({type:'LOAD_USER'})
+    } , [])
+
+
   return (
     <AuthContext.Provider value={user}>
         <AuthContextDispatcher.Provider value={dispatch}>{children}</AuthContextDispatcher.Provider>

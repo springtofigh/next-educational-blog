@@ -4,10 +4,9 @@ import InputComponent from '@/components/FormInput';
 import Link from 'next/link';
 import Layout from '@/containers/Layout';
 import Head from 'next/head';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { useAuthActions } from '@/context/AuthContext';
+import { useAuth, useAuthActions } from '@/context/AuthContext';
+import { useEffect } from 'react';
 
 // Initial values
 const initialValues = {
@@ -42,11 +41,18 @@ const validationSchema = Yup.object({
 function RegisterForm() {
     const router = useRouter();
     const dispatch = useAuthActions();
+    const { loading, user } = useAuth();
     // onSubmit
     const onSubmit = (values) => {
         const { name, email, password, phoneNumber } = values
         dispatch({type:'SIGNUP', payload: { name, email, password, phoneNumber }})
     }
+
+    useEffect(() => {
+        if (user) {
+            router.push("/")
+        }
+    }, [user])
 
     const formik = useFormik({
         initialValues,
