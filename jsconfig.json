@@ -8,6 +8,7 @@
         "@/hooks/*": ["src/hooks/*"],
         "@/common/*": ["src/context/*"],
         "@/utils/*": ["src/utils/*"],
+        "@/services/*": ["src/services/*"]
       }
     }
   }

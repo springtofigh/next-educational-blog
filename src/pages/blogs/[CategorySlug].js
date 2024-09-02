@@ -5,6 +5,7 @@ import SortBar from "@/components/Posts/SortBar";
 import DesktopCategory from "@/components/Posts/DesktopCategory";
 import queryString from 'query-string';
 import Layout from '@/containers/Layout';
+import http from '@/services/httpService';
 
 
 function blogCategory({ blogsData, postCategories }) {
@@ -49,13 +50,13 @@ export async function getServerSideProps(context) {
   const queryStringified = queryString.stringify(apiParams);
   
   // Make the request to API
-  const { data: result } = await axios.get(`http://localhost:5000/api/posts?${queryStringified}`,{ 
+  const { data: result } = await http.get(`/posts?${queryStringified}`,{ 
     withCredentials: true,
     headers: {
     cookie: req.headers.cookie || "",
     },
   });
-  const { data: postCategories } = await axios.get('http://localhost:5000/api/post-category');
+  const { data: postCategories } = await http.get('/post-category');
   const { data } = result || { data: [] }; // against undefined result
 
   return {
