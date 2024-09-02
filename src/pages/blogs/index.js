@@ -33,8 +33,13 @@ function Blog({ blogsData, postCategories }) {
 export default Blog;
 
 
-export async function getServerSideProps() {
-  const { data: result } = await axios.get('http://localhost:5000/api/posts?page=1&limit=6');
+export async function getServerSideProps({ req }) {
+  const { data: result } = await axios.get('http://localhost:5000/api/posts?page=1&limit=6', { 
+    withCredentials: true,
+    headers: {
+    cookie: req.headers.cookie || "",
+    },
+  });
   const { data: postCategories } = await axios.get('http://localhost:5000/api/post-category')
   const { data } = result;
 

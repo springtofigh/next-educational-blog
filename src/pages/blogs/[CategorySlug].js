@@ -35,7 +35,7 @@ export default blogCategory;
 
 
 export async function getServerSideProps(context) {
-  const { params, query } = context;
+  const { params, query, req } = context;
 
   // Create an object for the query parameters
   const apiParams = {
@@ -49,7 +49,12 @@ export async function getServerSideProps(context) {
   const queryStringified = queryString.stringify(apiParams);
   
   // Make the request to API
-  const { data: result } = await axios.get(`http://localhost:5000/api/posts?${queryStringified}`);
+  const { data: result } = await axios.get(`http://localhost:5000/api/posts?${queryStringified}`,{ 
+    withCredentials: true,
+    headers: {
+    cookie: req.headers.cookie || "",
+    },
+  });
   const { data: postCategories } = await axios.get('http://localhost:5000/api/post-category');
   const { data } = result || { data: [] }; // against undefined result
 
