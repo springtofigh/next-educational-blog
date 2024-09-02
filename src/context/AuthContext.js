@@ -8,7 +8,7 @@ import { useEffect } from "react";
 const AuthContext = createContext();
 const AuthContextDispatcher = createContext();
 
-const initialState = { user: null, isLoading: false, error:null }
+const initialState = { user: null, isLoading: true, error:null }
 
 const reducer = (state, action) => {
     switch(action.type) {
