@@ -4,6 +4,7 @@ import MobileCategory from "@/components/Posts/MobileCategory";
 import SortBar from "@/components/Posts/SortBar";
 import DesktopCategory from "@/components/Posts/DesktopCategory";
 import Layout from '@/containers/Layout';
+import http from '@/services/httpService';
 
 
 function Blog({ blogsData, postCategories }) {
@@ -34,8 +35,7 @@ export default Blog;
 
 
 export async function getServerSideProps({ req }) {
-  const { data: result } = await axios.get('http://localhost:5000/api/posts?page=1&limit=6', { 
-    withCredentials: true,
+  const { data: result } = await http.get('/posts?page=1&limit=6', { 
     headers: {
     cookie: req.headers.cookie || "",
     },
