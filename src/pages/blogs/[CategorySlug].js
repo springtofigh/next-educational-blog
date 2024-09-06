@@ -1,4 +1,3 @@
-import axios from 'axios';
 import PostList from "@/components/Posts/PostList";
 import MobileCategory from "@/components/Posts/MobileCategory";
 import SortBar from "@/components/Posts/SortBar";
@@ -51,7 +50,6 @@ export async function getServerSideProps(context) {
   
   // Make the request to API
   const { data: result } = await http.get(`/posts?${queryStringified}`,{ 
-    withCredentials: true,
     headers: {
     cookie: req.headers.cookie || "",
     },

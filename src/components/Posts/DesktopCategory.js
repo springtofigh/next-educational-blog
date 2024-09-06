@@ -1,9 +1,12 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
+import { useRouter } from "next/router";
 import { useState } from 'react';
 
 function DesktopCategory({ postCategories }) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(true);
+  const { query } = useRouter();
+
   return (
     <div className="bg-white rounded-3xl overflow-hidden">
         {/* سربرگ منوی آکاردئونی */}
@@ -14,7 +17,8 @@ function DesktopCategory({ postCategories }) {
         {/* محتوای منوی آکاردئونی */}
         <div className={`${isOpen ? "block" :"hidden"}`}>
           <Link href="/blogs">
-          <span className="block pr-4 py-2 hover:bg-purple-500 mb-1">
+          <span className={`block pr-4 py-2 hover:bg-purple-500 mb-1 ${
+            !query.CategorySlug ? "bg-purple-700 text-white hover:bg-purple-500" : ""}`}>
             همه مقالات
           </span>
           </Link>
@@ -22,7 +26,8 @@ function DesktopCategory({ postCategories }) {
             postCategories.map(category => {
               return (
                 <Link href={`/blogs/${category.englishTitle}`} key={category._id}>
-                <span className="block pr-4 py-2 hover:bg-purple-500 mb-1">
+                <span className={`block pr-4 py-2 hover:bg-purple-500 mb-1 ${
+                  query.CategorySlug === category.englishTitle ? "bg-purple-700 text-white hover:bg-purple-500" : ""}`}>
                   {category.title}
                 </span>
                 </Link>
