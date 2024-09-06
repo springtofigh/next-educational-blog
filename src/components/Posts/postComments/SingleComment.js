@@ -3,9 +3,8 @@ import { UserIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import CommentForm from './CommentForm';
 
-function SingleComment({ comment }) {
+function SingleComment({ comment, postId }) {
   const [onReply, setOnReply] = useState(false);
-  const [commentValue, setCommentValue] = useState(" ");
   return (
     <div className="border border-gray-300 rounded p-4 mb-8">
       <div className="flex items-center justify-start">
@@ -24,7 +23,7 @@ function SingleComment({ comment }) {
       {onReply && 
         <div className="mt-4">
           <span className="text-gray-500 text-sm"> در حال پاسخ به {comment.writer?.name}</span>
-          <CommentForm comment={commentValue} setComment={setCommentValue} />
+          <CommentForm postId={postId} responseTo={comment._id} setOnReply={setOnReply} />
         </div>
       }
     </div>

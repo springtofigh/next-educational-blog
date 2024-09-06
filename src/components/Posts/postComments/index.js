@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React from 'react'
 import SingleComment from "./SingleComment";
 import CommentForm from "./CommentForm";
 import ReplyComment from "./ReplyComment";
 
 function PostComments({ post }) {
-  const [commentValue, setCommentValue] = useState(" ");
   return (
     <div>
         <h2 className="font-black text-2xl mb-8">نظرات</h2>
         {post.comments.map((comment) => {
                 return !comment.responseTo && comment.status === 2 && (
                   <React.Fragment key={comment._id}>
-                  <SingleComment comment={comment} />
-                  <ReplyComment comments={post.comments} parentCommentId={comment._id} />
+                  <SingleComment comment={comment} postId={post._id} />
+                  <ReplyComment
+                  comments={post.comments} 
+                  parentCommentId={comment._id}
+                  postId={post._id}
+                  />
                 </React.Fragment>
                 )
             })
@@ -20,7 +23,7 @@ function PostComments({ post }) {
             {/* Send Comments */}
             <div className="mt-8">
                 <span className="font-bold md:text-lg">ارسال نظر جدید</span>
-                <CommentForm comment={commentValue} setComment={setCommentValue} />
+                <CommentForm postId={post._id} responseTo={null} />
             </div>
     </div>
   )
