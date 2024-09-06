@@ -5,6 +5,7 @@ import DesktopCategory from "@/components/Posts/DesktopCategory";
 import queryString from 'query-string';
 import Layout from '@/containers/Layout';
 import http from '@/services/httpService';
+import PaginationComponent from '@/common/PaginationComponent';
 
 
 function blogCategory({ blogsData, postCategories }) {
@@ -24,6 +25,7 @@ function blogCategory({ blogsData, postCategories }) {
             {/* Blogs Section */}
             <div className='grid grid-cols-6 gap-4 md:col-span-9'>
               <PostList blogsData={blogsData.docs}/>
+              <PaginationComponent page={blogsData.page} totalPages={blogsData.totalPages} />
             </div>
         </div>
     </div>

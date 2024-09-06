@@ -6,7 +6,7 @@ import DesktopCategory from "@/components/Posts/DesktopCategory";
 import Layout from '@/containers/Layout';
 import http from '@/services/httpService';
 import queryString from 'query-string';
-
+import PaginationComponent from '@/common/PaginationComponent';
 
 function Blog({ blogsData, postCategories }) {
   return (
@@ -25,6 +25,7 @@ function Blog({ blogsData, postCategories }) {
                 {/* Blogs Section */}
                 <div className='grid grid-cols-6 gap-4 md:col-span-9'>
                   <PostList blogsData={blogsData.docs}/>
+                  <PaginationComponent page={blogsData.page} totalPages={blogsData.totalPages} />
                 </div>
             </div>
         </div>
@@ -42,7 +43,7 @@ export async function getServerSideProps({ req, query }) {
     cookie: req.headers.cookie || "",
     },
   });
-  const { data: postCategories } = await axios.get('http://localhost:5000/api/post-category')
+  const { data: postCategories } = await http.get('/post-category');
   const { data } = result;
 
   return { props: { blogsData: data, postCategories: postCategories.data } }

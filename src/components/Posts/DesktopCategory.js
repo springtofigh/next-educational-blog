@@ -8,7 +8,7 @@ function DesktopCategory({ postCategories }) {
   const { query } = useRouter();
 
   return (
-    <div className="bg-white rounded-3xl overflow-hidden">
+    <div className="bg-white rounded-3xl overflow-hidden sticky top-24">
         {/* سربرگ منوی آکاردئونی */}
         <div className="flex items-center justify-between px-4 py-4 cursor-pointer bg-purple-200" onClick={() => setIsOpen(!isOpen)}>
           <span>دسته‌بندی مقالات</span>

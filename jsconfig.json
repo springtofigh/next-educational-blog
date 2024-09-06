@@ -6,7 +6,7 @@
         "@/containers/*": ["src/containers/*"],
         "@/context/*": ["src/context/*"],
         "@/hooks/*": ["src/hooks/*"],
-        "@/common/*": ["src/context/*"],
+        "@/common/*": ["src/common/*"],
         "@/utils/*": ["src/utils/*"],
         "@/services/*": ["src/services/*"]
       }
