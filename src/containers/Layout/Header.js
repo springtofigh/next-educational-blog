@@ -1,12 +1,13 @@
 import { useAuth, useAuthActions } from '@/context/AuthContext';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 function Header() {
-    const { user, isLoading} = useAuth();
-    const dispatch = useAuthActions();
+    const userInfo = useSelector(state => state.userSignin);
+    const { user, loading} = userInfo;
   return (
     <header className='bg-white shadow-md py-2 mb-8 sticky top-0 z-40'>
-        <div className={`container mx-auto xl:max-w-screen-xl transition-all ${isLoading ? "opacity-0" : "opacity-100"}`}>
+        <div className={`container mx-auto xl:max-w-screen-xl transition-all ${loading ? "opacity-0" : "opacity-100"}`}>
             <nav className='flex justify-between'>
                 <ul className='flex items-center gap-x-5'>
                     <li>

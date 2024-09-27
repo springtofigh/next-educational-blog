@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import Layout from '@/containers/Layout';
-import { useAuth } from '@/context/AuthContext';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
-  const user = useAuth();
-  console.log(user);
+  const userInfo = useSelector(state => state.userSignin);
+  const { user } = userInfo;
   return (
     <Layout>
     <div className='flex items-center justify-center'>
-      <h2>سلام بهار</h2>
+     {user && <h2>{user.name} سلام </h2>}
+     <span> به پروژه Next.App خوش اومدی!</span>
       <Link href="/blogs">
             <span className="block p-2 hover:bg-purple-500">
               همه مقالات؟
