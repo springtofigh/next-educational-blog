@@ -1,10 +1,11 @@
-import { useAuth, useAuthActions } from '@/context/AuthContext';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from 'src/redux/user/userActions';
 
 function Header() {
     const userInfo = useSelector(state => state.userSignin);
     const { user, loading} = userInfo;
+    const dispatch = useDispatch();
   return (
     <header className='bg-white shadow-md py-2 mb-8 sticky top-0 z-40'>
         <div className={`container mx-auto xl:max-w-screen-xl transition-all ${loading ? "opacity-0" : "opacity-100"}`}>
@@ -30,7 +31,7 @@ function Header() {
                     </Link>
                     <button 
                     className='bg-red-600 px-2 py-1 rounded text-red-100'
-                    onClick={() => dispatch({type: "SIGNOUT"})}
+                    onClick={() => dispatch(signout)}
                     >خروج
                     </button>
                     </> ) : (<>
