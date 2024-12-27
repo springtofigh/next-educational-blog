@@ -1,6 +1,7 @@
 import { ClockIcon } from "@heroicons/react/outline";
 import Link from 'next/link';
 import PostInteraction from "./PostInteraction";
+import { convertToPersianNumbers } from "@/utils/toPersianNumbers";
 
 
 function PostList({ blogsData }) {
@@ -38,7 +39,7 @@ function PostList({ blogsData }) {
                 <div className='flex items-center text-gray-400 text-[10px] font-bold'>
                   <ClockIcon className='w-4 h-4 stroke-gray-400 ml-1'/>
                   <span className='ml-1'>زمان مطالعه:</span>
-                  <span className='ml-1 leading-3'>{blog.readingTime}</span>
+                  <span className='ml-1 leading-3'>{convertToPersianNumbers(blog.readingTime)}</span>
                   <span>دقیقه</span>
                 </div>
               </div>
