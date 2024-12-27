@@ -8,7 +8,7 @@ function PostList({ blogsData }) {
     blogsData.map((blog, index) => {
         return (
           <div key={index} 
-          className='col-span-6 md:col-span-3 lg:col-span-2 bg-white rounded-3xl p-2 flex flex-col max-h-[350px]'>
+          className='col-span-6 md:col-span-3 lg:col-span-2 gap-8 bg-white rounded-3xl p-2 flex flex-col max-h-[350px]'>
               {/* COVER IMAGE */}
             <div className='aspect-w-16 aspect-h-9 mb-6'>
             <Link href={`posts/${blog.hashId}/${blog.slug}`}>
@@ -23,7 +23,7 @@ function PostList({ blogsData }) {
               {/* BLOG DATA */}
             <div>
               {/* BLOG AUTHOR-CATEGORY */}
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between mb-4'>
               <div className='flex items-center'>
               <img src="/images/avatar.jpg" alt="بهار توفیق" className="rounded-full w-6 h-6 ring-2 ring-violet-600 ml-2" />
                 <span>{blog.author.name}</span>
