@@ -31,7 +31,7 @@ function Header() {
                     </Link>
                     <button 
                     className='bg-red-600 px-2 py-1 rounded text-red-100'
-                    onClick={() => dispatch(signout)}
+                    onClick={() => dispatch(signout())}
                     >خروج
                     </button>
                     </> ) : (<>
