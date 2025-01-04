@@ -25,3 +25,19 @@ button:disabled {
   color:#444;
   background-color: #ddd;
 }
+
+.footer-bg {
+  background-color: #121111;
+}
+
+.footer-links {
+  background-color: #191818;
+}
+
+.footer-text {
+  color: #D1D0D0;
+}
+
+.footer-whatsup {
+  fill: linear-gradient(to bottom, #1FAF38, #60D669);
+}
