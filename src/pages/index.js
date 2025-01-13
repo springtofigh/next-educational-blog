@@ -4,18 +4,15 @@ import http from '@/services/httpService';
 import queryString from 'query-string';
 import HeroSection from '@/components/HomeSections/HeroSection';
 import HomeDetailsContainer from '@/common/HomeDetailsContainer';
-import HelpSectoin from '@/components/HomeSections/HelpSectoin';
 
 export default function Home({ blogsData, postCategories }) {
   const user = useAuth();
   console.log(user);
-  console.log(blogsData);
   
   return (
     <Layout>
       <HeroSection/>
-      <HomeDetailsContainer blogsData={blogsData.docs}/>
-      <HelpSectoin/>
+      <HomeDetailsContainer blogsData={blogsData.docs} postCategories={postCategories} />
     </Layout>
   )
 }
