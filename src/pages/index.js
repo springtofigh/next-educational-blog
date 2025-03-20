@@ -2,7 +2,6 @@ import Layout from '@/containers/Layout';
 import { useAuth } from '@/context/AuthContext';
 import http from '@/services/httpService';
 import queryString from 'query-string';
-import HeroSection from '@/components/HomeSections/HeroSection';
 import HomeDetailsContainer from '@/common/HomeDetailsContainer';
 
 export default function Home({ blogsData, postCategories }) {
@@ -11,7 +10,6 @@ export default function Home({ blogsData, postCategories }) {
   
   return (
     <Layout>
-      <HeroSection/>
       <HomeDetailsContainer blogsData={blogsData.docs} postCategories={postCategories} />
     </Layout>
   )
