@@ -40,7 +40,7 @@ function CommentForm({ postId, responseTo, setOnReply }) {
         placeholder="نظرت رو برام بنویس ..."
         />
         <button 
-        className="mt-4 mx-auto py-4 w-full sm:w-56 bg-violet-600 rounded-xl text-white px-3 md:text-lg"
+        className="mt-4 mb-20 mx-auto py-4 w-full sm:w-56 bg-violet-600 rounded-xl text-white px-3 md:text-lg"
         onClick={submitHandler}
         >
             ارسال نظر
