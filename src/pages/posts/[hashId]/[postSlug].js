@@ -15,7 +15,7 @@ import toLocalDate from "@/utils/toLocalDate";
 import Layout from '@/containers/Layout';
 
 
-function postPage({ post }) {
+function PostPage({ post }) {
   const [copied, setCopied] = useState(false);
   const copyHandler = () => {
     setCopied(true)
@@ -163,7 +163,7 @@ function postPage({ post }) {
   )
 }
 
-export default postPage;
+export default PostPage;
 
 export async function getServerSideProps(context) {
   const { query, req } =  context
