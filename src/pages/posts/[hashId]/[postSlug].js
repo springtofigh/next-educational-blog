@@ -168,7 +168,7 @@ export default PostPage;
 export async function getServerSideProps(context) {
   const { query, req } =  context
   
-  const { data: {data} } = await axios.get(`http://localhost:5000/api/posts/${query.postSlug}`,{ 
+  const { data: {data} } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/posts/${query.postSlug}`,{ 
     withCredentials: true,
     headers: {
     cookie: req.headers.cookie || "",
