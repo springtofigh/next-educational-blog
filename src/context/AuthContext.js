@@ -23,7 +23,7 @@ const asyncActionHandlers = {
     SIGNIN: ({ dispatch }) => (action) => {
         dispatch({ type: "SIGNIN_PENDING" });
         axios
-        .post('http://localhost:5000/api/user/signin', action.payload , { withCredentials: true })
+        .post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/signin`, action.payload , { withCredentials: true })
         .then(({ data }) => {
             toast.success('شما با موفقیت وارد شدید');
             dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
@@ -37,7 +37,7 @@ const asyncActionHandlers = {
     SIGNUP: ({ dispatch }) => (action) => {
         dispatch({ type: "SIGNIN_PENDING" });
         axios
-        .post('http://localhost:5000/api/user/signup', action.payload , { withCredentials: true })
+        .post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/signup`, action.payload , { withCredentials: true })
         .then(({ data }) => {
             toast.success('ثبت نام شما با موفقیت انجام شد');
             dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
@@ -51,7 +51,7 @@ const asyncActionHandlers = {
     LOAD_USER: ({ dispatch }) => (action) => {
         dispatch({ type: "SIGNIN_PENDING" });
         axios
-        .get('http://localhost:5000/api/user/load',{ withCredentials: true })
+        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/load`,{ withCredentials: true })
         .then(({ data }) => {
             dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
         })
@@ -62,7 +62,7 @@ const asyncActionHandlers = {
     SIGNOUT: ({ dispatch }) => (action) => {
         dispatch({ type: "SIGNIN_PENDING" });
         axios
-        .get('http://localhost:5000/api/user/logout',{ withCredentials: true })
+        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/logout`,{ withCredentials: true })
         .then(({ data }) => {
             window.location.href= "/"
         })
