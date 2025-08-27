@@ -49,7 +49,6 @@ Front Top Learn is a modern blog platform built with **Next.js**, **Tailwind CSS
 
 ## 📸 Screenshots
 
-> ![Home Page](./public/screenshots/home.png)
 <img width="1920" height="1385" alt="screencapture-localhost-3000-2025-03-20-14_32_30" src="https://github.com/user-attachments/assets/2f124dfd-1d72-44a2-b82a-5bbcef4ce92d" />
 
 <img width="1920" height="1292" alt="screencapture-localhost-3000-blogs-2025-03-20-14_32_52" src="https://github.com/user-attachments/assets/13db5d50-6499-4ba2-b981-d90a27ca9cc0" />
