@@ -14,6 +14,7 @@ function CommentForm({ postId, responseTo, setOnReply }) {
     console.log(commentValue, postId, responseTo);
     const data = {
       content: commentValue,
+      postId, 
       responseTo,
     }
 
