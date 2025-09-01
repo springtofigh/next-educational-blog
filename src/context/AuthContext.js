@@ -62,7 +62,7 @@ const asyncActionHandlers = {
     SIGNOUT: ({ dispatch }) => () => {
   dispatch({ type: "SIGNIN_PENDING" });
   axios
-    .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/logout`, {
+    .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/logout`, {
       withCredentials: true,
     })
     .then(() => {
