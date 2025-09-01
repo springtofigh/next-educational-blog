@@ -59,19 +59,18 @@ const asyncActionHandlers = {
             dispatch({ type: "SIGNIN_REJECT" , error: err?.response?.data?.message});
         });
     },
-      SIGNOUT:
-    ({ dispatch }) =>
-    () => {
-      dispatch({ type: "SIGNIN_PENDING" });
-      axios
-        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/logout`, {
-          withCredentials: true,
-        })
-        .then(() => {
-          window.location.href = "/";
-        })
-        .catch(() => {});
-    },
+    SIGNOUT: ({ dispatch }) => () => {
+  dispatch({ type: "SIGNIN_PENDING" });
+  axios
+    .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/logout`, {
+      withCredentials: true,
+    })
+    .then(() => {
+      dispatch({ type: "SIGNIN_SUCCESS", payload: null }); // clear state
+      window.location.href = "/";
+    })
+    .catch(() => {});
+},
 };
 
 function AuthProvider({ children }) {
