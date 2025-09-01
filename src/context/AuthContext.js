@@ -11,78 +11,119 @@ const AuthContextDispatcher = createContext();
 const initialState = { user: null, isLoading: true, error:null }
 
 const reducer = (state, action) => {
-    switch(action.type) {
-        case "SIGNIN_PENDING": return { user: null, isLoading: true, error:false };
-        case "SIGNIN_SUCCESS" : return { user: action.payload, isLoading: false, error:null };
-        case "SIGNIN_REJECT" : return { user: null, isLoading:false, error: action.error };
-        default: return {...state}
-    }
-}
+  switch (action.type) {
+    case "SIGNIN_PENDING":
+      return { user: null, isLoading: true, error: false };
+    case "SIGNIN_SUCCESS":
+      return { user: action.payload, isLoading: false, error: null };
+    case "SIGNIN_REJECT":
+      return { user: null, isLoading: false, error: action.error };
+    default:
+      return { ...state };
+  }
+};
 
 const asyncActionHandlers = {
-    SIGNIN: ({ dispatch }) => (action) => {
-        dispatch({ type: "SIGNIN_PENDING" });
-        axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/signin`, action.payload , { withCredentials: true })
+  SIGNIN:
+    ({ dispatch }) =>
+    (action) => {
+      dispatch({ type: "SIGNIN_PENDING" });
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/signin`,
+          action.payload,
+          { withCredentials: true }
+        )
         .then(({ data }) => {
-            toast.success('شما با موفقیت وارد شدید');
-            dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
-            Router.push("/")
+          toast.success("شما با موفقیت وارد شدید");
+          dispatch({ type: "SIGNIN_SUCCESS", payload: data });
+          Router.push("/");
         })
-        .catch(err =>{
-            dispatch({ type: "SIGNIN_REJECT" , error: err?.response?.data?.message});
-            toast.error(err?.response?.data?.message);
+        .catch((err) => {
+          dispatch({
+            type: "SIGNIN_REJECT",
+            error: err?.response?.data?.message,
+          });
+          toast.error(err?.response?.data?.message);
         });
     },
-    SIGNUP: ({ dispatch }) => (action) => {
-        dispatch({ type: "SIGNIN_PENDING" });
-        axios
-        .post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/signup`, action.payload , { withCredentials: true })
+
+  SIGNUP:
+    ({ dispatch }) =>
+    (action) => {
+      dispatch({ type: "SIGNIN_PENDING" });
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/signup`,
+          action.payload,
+          { withCredentials: true }
+        )
         .then(({ data }) => {
-            toast.success('ثبت نام شما با موفقیت انجام شد');
-            dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
-            Router.push("/")
+          toast.success("ثبت نام شما با موفقیت انجام شد");
+          dispatch({ type: "SIGNIN_SUCCESS", payload: data });
+          Router.push("/");
         })
-        .catch(err =>{
-            dispatch({ type: "SIGNIN_REJECT" , error: err?.response?.data?.message});
-            toast.error(err?.response?.data?.message);
+        .catch((err) => {
+          dispatch({
+            type: "SIGNIN_REJECT",
+            error: err?.response?.data?.message,
+          });
+          toast.error(err?.response?.data?.message);
         });
     },
-    LOAD_USER: ({ dispatch }) => (action) => {
-        dispatch({ type: "SIGNIN_PENDING" });
-        axios
-        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/load`,{ withCredentials: true })
-        .then(({ data }) => {
-            dispatch({ type: "SIGNIN_SUCCESS" ,payload: data});
+
+  LOAD_USER:
+    ({ dispatch }) =>
+    () => {
+      dispatch({ type: "SIGNIN_PENDING" });
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/load`, {
+          withCredentials: true,
         })
-        .catch(err =>{
-            dispatch({ type: "SIGNIN_REJECT" , error: err?.response?.data?.message});
+        .then(({ data }) => {
+          dispatch({ type: "SIGNIN_SUCCESS", payload: data });
+        })
+        .catch((err) => {
+          dispatch({
+            type: "SIGNIN_REJECT",
+            error: err?.response?.data?.message,
+          });
         });
     },
-    SIGNOUT: ({ dispatch }) => (action) => {
-        dispatch({ type: "SIGNIN_PENDING" });
-        axios
-        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/user/logout`,{ withCredentials: true })
-        .then(({ data }) => {
-            window.location.href= "/"
+
+  SIGNOUT:
+    ({ dispatch }) =>
+    () => {
+      dispatch({ type: "SIGNIN_PENDING" });
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/user/logout`, {
+          withCredentials: true,
         })
-        .catch();
+        .then(() => {
+          window.location.href = "/";
+        })
+        .catch(() => {});
     },
 };
 
 function AuthProvider({ children }) {
-    const [user, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
+  const [user, dispatch] = useReducerAsync(
+    reducer,
+    initialState,
+    asyncActionHandlers
+  );
 
-    useEffect(() => {
-        dispatch({type:'LOAD_USER'})
-    } , [])
-
+  useEffect(() => {
+    dispatch({ type: "LOAD_USER" });
+  }, []);
 
   return (
     <AuthContext.Provider value={user}>
-        <AuthContextDispatcher.Provider value={dispatch}>{children}</AuthContextDispatcher.Provider>
+      <AuthContextDispatcher.Provider value={dispatch}>
+        {children}
+      </AuthContextDispatcher.Provider>
     </AuthContext.Provider>
-  )
+  );
 }
 
 export default AuthProvider;
